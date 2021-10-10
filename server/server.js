@@ -8,7 +8,7 @@ const express = require('express'),
 
 
       coinRoutes = require('./routes/coinRoutes'),
-      adUnitRoutes= require('./routes/adunit.route'); 
+      adUnitRoutes = require('./routes/adunit.route');
       
       
 
@@ -26,7 +26,7 @@ const express = require('express'),
 
 
       app.use('/coins', coinRoutes);
-      app.use('/adunits',adUnitRoutes)
+      app.use('/adunits', adUnitRoutes);
 
 
 
