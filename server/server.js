@@ -9,7 +9,9 @@ const express = require('express'),
 
       coinRoutes = require('./routes/coinRoutes'),
       adUnitRoutes = require('./routes/adunit.route'),
-      businessRoutes = require('./routes/business.route');
+      businessRoutes = require('./routes/business.route'),
+      advertiserRoutes = require('./routes/advertiser.route');
+      
 
       
       
@@ -30,6 +32,8 @@ const express = require('express'),
       app.use('/coins', coinRoutes);
       app.use('/adunits', adUnitRoutes);
       app.use('/business', businessRoutes);
+      app.use('/advertiser', advertiserRoutes);
+
 
 
 
