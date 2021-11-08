@@ -87,72 +87,131 @@ advertiserRoutes.route('/delete/:id').get(function (req, res) {
         else res.json('Successfully removed');
     });
 });
-
-
-advertiserRoutes.get('/maxproducts', function(req, res){
+// max Top 5 category 2019
+advertiserRoutes.get('/maxCategory', function(req, res){
     Advertiser.aggregate([
         {
+            '$match': {
+                'year': '2019'
+            }
+        }, {
             '$group': {
-                '_id': '$_id', 
-                'product': {
-                    '$first': '$product'
-                }, 
-                'totoal': {
-                    '$avg': '$total_RM'
+                '_id': '$category', 
+                'Total': {
+                    '$sum': '$total_RM'
                 }
             }
         }, {
             '$sort': {
-                'totoal': -1
+                'Total': -1
             }
         }, {
             '$limit': 5
         }
+    
+       
     ],  function(err, maXproduct){
         if(err) return next (err);
         res.json(maXproduct)
       })
 })
 
-advertiserRoutes.get('/maxCategory', function(req, res){
+// max Top 5 category 2020
+advertiserRoutes.get('/maxCategoryt', function(req, res){
     Advertiser.aggregate([
         {
+            '$match': {
+                'year': '2020'
+            }
+        }, {
             '$group': {
-                '_id': '$_id', 
-                'category': {
-                    '$first': '$category'
-                }, 
-                'overalCategoryExpend': {
-                    '$avg': '$total_RM'
+                '_id': '$category', 
+                'Total': {
+                    '$sum': '$total_RM'
                 }
             }
         }, {
             '$sort': {
-                'overalCategoryExpend': -1
+                'Total': -1
             }
         }, {
             '$limit': 5
         }
+    
+       
+    ],  function(err, maxCategoryT){
+        if(err) return next (err);
+        res.json(maxCategoryT)
+      })
+})
+// Top 5 Advertiser/ brands_Products Q1 in 2019
+advertiserRoutes.get('/maxQuater', function(req, res){
+    Advertiser.aggregate([
+        {
+            '$match': {
+                'year': '2019'
+            }
+        }, {
+            '$group': {
+                '_id': '$brands_Products', 
+                'Q1': {
+                    '$sum': '$q1_RM'
+                }
+            }
+        }, {
+            '$sort': {
+                'Q1': -1
+            }
+        }, {
+            '$limit': 5
+        }        
     ],  function(err, maxCategory){
         if(err) return next (err);
         res.json(maxCategory)
       })
 })
-advertiserRoutes.get('/maxFormat', function(req, res){
+// Top 5 Advertiser/ brands_Products Q2 in 2019
+advertiserRoutes.get('/maxQuatert', function(req, res){
     Advertiser.aggregate([
         {
+            '$match': {
+                'year': '2019'
+            }
+        }, {
             '$group': {
-                '_id': '$_id', 
-                'category': {
-                    '$first': '$category'
-                }, 
-                'overalFormatExpend': {
-                    '$avg': '$total_RM'
+                '_id': '$brands_Products', 
+                'Q2': {
+                    '$sum': '$q2_RM'
                 }
             }
         }, {
             '$sort': {
-                'overalFormatExpend': -1
+                'Q2': -1
+            }
+        }, {
+            '$limit': 5
+        }        
+    ],  function(err, maxCategoryt){
+        if(err) return next (err);
+        res.json(maxCategoryt)
+      })
+})
+
+advertiserRoutes.get('/maxFormat', function(req, res){
+    Advertiser.aggregate([
+        {
+            '$group': {
+                '_id': '$format', 
+                'format': {
+                    '$first': '$format'
+                }, 
+                'totalFormat': {
+                    '$sum': '$total_RM'
+                }
+            }
+        }, {
+            '$sort': {
+                'totalFormat': -1
             }
         }, {
             '$limit': 5
@@ -162,6 +221,36 @@ advertiserRoutes.get('/maxFormat', function(req, res){
         res.json(maxFormat)
       })
 })
+advertiserRoutes.get('/maxState', function(req, res){
+    Advertiser.aggregate([
+        {
+            '$group': {
+                '_id': '$state', 
+                'format': {
+                    '$first': '$state'
+                }, 
+                'totalState': {
+                    '$sum': '$total_RM'
+                }
+            }
+        }, {
+            '$sort': {
+                'totalState': -1
+            }
+        }, {
+            '$limit': 5
+        }
+    ],  function(err, maxState){
+        if(err) return next (err);
+        res.json(maxState)
+      })
+})
+
+
+
+
+
+
 
 
 module.exports = advertiserRoutes;
