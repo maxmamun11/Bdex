@@ -196,50 +196,54 @@ advertiserRoutes.get('/maxQuatert', function(req, res){
         res.json(maxCategoryt)
       })
 })
-
+// Top 5 Advertiser/ brands_Products Q1 in 2020
 advertiserRoutes.get('/maxFormat', function(req, res){
     Advertiser.aggregate([
         {
+            '$match': {
+                'year': '2020'
+            }
+        }, {
             '$group': {
-                '_id': '$format', 
-                'format': {
-                    '$first': '$format'
-                }, 
-                'totalFormat': {
-                    '$sum': '$total_RM'
+                '_id': '$brands_Products', 
+                'Q1': {
+                    '$sum': '$q1_RM'
                 }
             }
         }, {
             '$sort': {
-                'totalFormat': -1
+                'Q1': -1
             }
         }, {
             '$limit': 5
-        }
+        }   
     ],  function(err, maxFormat){
         if(err) return next (err);
         res.json(maxFormat)
       })
 })
+
+// Top 5 Advertiser/ brands_Products Q2 in 2020
 advertiserRoutes.get('/maxState', function(req, res){
     Advertiser.aggregate([
         {
+            '$match': {
+                'year': '2020'
+            }
+        }, {
             '$group': {
-                '_id': '$state', 
-                'format': {
-                    '$first': '$state'
-                }, 
-                'totalState': {
-                    '$sum': '$total_RM'
+                '_id': '$brands_Products', 
+                'Q2': {
+                    '$sum': '$q2_RM'
                 }
             }
         }, {
             '$sort': {
-                'totalState': -1
+                'Q2': -1
             }
         }, {
             '$limit': 5
-        }
+        }   
     ],  function(err, maxState){
         if(err) return next (err);
         res.json(maxState)
