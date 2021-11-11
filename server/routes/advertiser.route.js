@@ -215,7 +215,7 @@ advertiserRoutes.get('/maxFormat', function(req, res){
                 'Q1': -1
             }
         }, {
-            '$limit': 5
+            '$limit': 10
         }   
     ],  function(err, maxFormat){
         if(err) return next (err);
@@ -250,6 +250,58 @@ advertiserRoutes.get('/maxState', function(req, res){
       })
 })
 
+// Top 10 Advertiser/ brands_Products Q1 in 2021
+advertiserRoutes.get('/maxTwintyOne', function(req, res){
+    Advertiser.aggregate([
+        {
+            '$match': {
+                'year': '2021'
+            }
+        }, {
+            '$group': {
+                '_id': '$brands_Products', 
+                'Q1': {
+                    '$sum': '$q1_RM'
+                }
+            }
+        }, {
+            '$sort': {
+                'Q1': -1
+            }
+        }, {
+            '$limit': 10
+        }   
+    ],  function(err, maxTwintyOne){
+        if(err) return next (err);
+        res.json(maxTwintyOne)
+      })
+})
+// Top 10 Advertiser/ brands_Products Q2 in 2021
+advertiserRoutes.get('/maxTwintyOnet', function(req, res){
+    Advertiser.aggregate([
+        {
+            '$match': {
+                'year': '2021'
+            }
+        }, {
+            '$group': {
+                '_id': '$brands_Products', 
+                'Q2': {
+                    '$sum': '$q2_RM'
+                }
+            }
+        }, {
+            '$sort': {
+                'Q2': -1
+            }
+        }, {
+            '$limit': 10
+        }   
+    ],  function(err, maxTwintyOnet){
+        if(err) return next (err);
+        res.json(maxTwintyOnet)
+      })
+})
 
 
 
