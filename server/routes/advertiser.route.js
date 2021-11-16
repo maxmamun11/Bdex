@@ -106,7 +106,7 @@ advertiserRoutes.get('/maxCategory', function(req, res){
                 'Total': -1
             }
         }, {
-            '$limit': 5
+            '$limit': 10
         }
     
        
@@ -135,7 +135,7 @@ advertiserRoutes.get('/maxCategoryt', function(req, res){
                 'Total': -1
             }
         }, {
-            '$limit': 5
+            '$limit': 10
         }
     
        
@@ -163,7 +163,7 @@ advertiserRoutes.get('/maxQuater', function(req, res){
                 'Q1': -1
             }
         }, {
-            '$limit': 5
+            '$limit': 10
         }        
     ],  function(err, maxCategory){
         if(err) return next (err);
@@ -189,7 +189,7 @@ advertiserRoutes.get('/maxQuatert', function(req, res){
                 'Q2': -1
             }
         }, {
-            '$limit': 5
+            '$limit': 10
         }        
     ],  function(err, maxCategoryt){
         if(err) return next (err);
@@ -242,7 +242,7 @@ advertiserRoutes.get('/maxState', function(req, res){
                 'Q2': -1
             }
         }, {
-            '$limit': 5
+            '$limit': 10
         }   
     ],  function(err, maxState){
         if(err) return next (err);
@@ -255,18 +255,18 @@ advertiserRoutes.get('/maxTwintyOne', function(req, res){
     Advertiser.aggregate([
         {
             '$match': {
-                'year': '2021'
+                'year': '2021'            
             }
         }, {
             '$group': {
                 '_id': '$brands_Products', 
-                'Q1': {
-                    '$sum': '$q1_RM'
+                'Total': {
+                    '$sum': '$total_RM'
                 }
             }
         }, {
             '$sort': {
-                'Q1': -1
+                'Total': -1
             }
         }, {
             '$limit': 10
@@ -276,7 +276,7 @@ advertiserRoutes.get('/maxTwintyOne', function(req, res){
         res.json(maxTwintyOne)
       })
 })
-// Top 10 Advertiser/ brands_Products Q2 in 2021
+// Top 10 Advertiser/ brands_Products Q3 in 2021
 advertiserRoutes.get('/maxTwintyOnet', function(req, res){
     Advertiser.aggregate([
         {
@@ -286,13 +286,13 @@ advertiserRoutes.get('/maxTwintyOnet', function(req, res){
         }, {
             '$group': {
                 '_id': '$brands_Products', 
-                'Q2': {
-                    '$sum': '$q2_RM'
+                'Q3': {
+                    '$sum': '$q3_RM'
                 }
             }
         }, {
             '$sort': {
-                'Q2': -1
+                'Q3': -1
             }
         }, {
             '$limit': 10
