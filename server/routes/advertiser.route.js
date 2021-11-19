@@ -302,6 +302,63 @@ advertiserRoutes.get('/maxTwintyOnet', function(req, res){
         res.json(maxTwintyOnet)
       })
 })
+// Top 10 Category in 2021
+advertiserRoutes.get('/maxTwintyOnett', function(req, res){
+    Advertiser.aggregate([
+        {
+            '$match': {
+                'year': '2021'
+            }
+        }, {
+            '$group': {
+                '_id': '$category', 
+                'Total': {
+                    '$sum': '$total_RM'
+                }
+            }
+        }, {
+            '$sort': {
+                'Total': -1
+            }
+        }, {
+            '$limit': 10
+        }   
+    ],  function(err, maxTwintyOnett){
+        if(err) return next (err);
+        res.json(maxTwintyOnett)
+      })
+})
+
+//Stack for 3 quaters
+advertiserRoutes.get('/maxTwintyOnettt', function(req, res){
+    Advertiser.aggregate([
+        
+  {
+    '$match': {
+        'year': '2021'
+    }
+}, {
+    '$group': {
+        '_id': {
+            'year': '$year'
+        }, 
+        'Q1': {
+            '$sum': '$q1_RM'
+        }, 
+        'Q2': {
+            '$sum': '$q2_RM'
+        }, 
+        'Q3': {
+            '$sum': '$q3_RM'
+        }
+    }
+}
+         
+    ],  function(err, maxTwintyOnettt){
+        if(err) return next (err);
+        res.json(maxTwintyOnettt)
+      })
+})
 
 
 
