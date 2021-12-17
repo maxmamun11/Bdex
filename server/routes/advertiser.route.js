@@ -451,7 +451,6 @@ advertiserRoutes.get('/maxTwintyOnetttq', function(req, res){
         }, {
             '$limit': 10
         }
-         
     ],  function(err, maxTwintyOnetttq){
         if(err) return next (err);
         res.json(maxTwintyOnetttq)
@@ -522,45 +521,45 @@ advertiserRoutes.get('/categoryByEnv', function(req, res){
 
 
 
-// //Q1 , Q2, Q3 combined stack Top 10 category by Environment
-// advertiserRoutes.get('/maxTwintyOnetttq', function(req, res){
-//     Advertiser.aggregate([
+//Q1 , Q2, Q3 combined stack Top 10 category by Environment
+advertiserRoutes.get('/maxTwityStack', function(req, res){
+    Advertiser.aggregate([
         
-//         {
-//             '$match': {
-//                 'year': '2021'
-//             }
-//         }, {
-//             '$group': {
-//                 '_id': {
-//                     'category': '$category', 
-//                     'format': '$format'
-//                 }, 
-//                 'Q1': {
-//                     '$sum': '$q1_RM'
-//                 }, 
-//                 'Q2': {
-//                     '$sum': '$q2_RM'
-//                 }, 
-//                 'Q3': {
-//                     '$sum': '$q3_RM'
-//                 }
-//             }
-//         }, {
-//             '$sort': {
-//                 'Q1': -1, 
-//                 'Q2': -1, 
-//                 'Q3': -1
-//             }
-//         }, {
-//             '$limit': 10
-//         }
+        {
+            '$match': {
+                'year': '2021'
+            }
+        }, {
+            '$group': {
+                '_id': {
+                    'category': '$category', 
+                    'Environment': '$environment'
+                }, 
+                'Q1': {
+                    '$sum': '$q1_RM'
+                }, 
+                'Q2': {
+                    '$sum': '$q2_RM'
+                }, 
+                'Q3': {
+                    '$sum': '$q3_RM'
+                }
+            }
+        }, {
+            '$sort': {
+                'Q1': -1, 
+                'Q2': -1, 
+                'Q3': -1
+            }
+        }, {
+            '$limit': 10
+        }
          
-//     ],  function(err, maxTwintyOnetttq){
-//         if(err) return next (err);
-//         res.json(maxTwintyOnetttq)
-//       })
-// })
+    ],  function(err, maxTwityStack){
+        if(err) return next (err);
+        res.json(maxTwityStack)
+      })
+})
 
 
 // Top 10 Category by Environement at  Q3 in 2021
@@ -574,7 +573,7 @@ advertiserRoutes.get('/maxTwintyOneE', function(req, res){
             '$group': {
                 '_id': {
                     'category': '$category', 
-                    'format': '$environment'
+                    'Environment': '$environment'
                 }, 
                 'Q3': {
                     '$sum': '$q3_RM'
@@ -626,74 +625,74 @@ advertiserRoutes.get('/categoryByReg', function(req, res){
 
 
 // //Q1 , Q2, Q3 combined stack Top 10 category by Region
-// advertiserRoutes.get('/maxTwintyOnetttq', function(req, res){
-//     Advertiser.aggregate([
+advertiserRoutes.get('/maxTwintyOneStack', function(req, res){
+    Advertiser.aggregate([
         
-//         {
-//             '$match': {
-//                 'year': '2021'
-//             }
-//         }, {
-//             '$group': {
-//                 '_id': {
-//                     'category': '$category', 
-//                     'format': '$format'
-//                 }, 
-//                 'Q1': {
-//                     '$sum': '$q1_RM'
-//                 }, 
-//                 'Q2': {
-//                     '$sum': '$q2_RM'
-//                 }, 
-//                 'Q3': {
-//                     '$sum': '$q3_RM'
-//                 }
-//             }
-//         }, {
-//             '$sort': {
-//                 'Q1': -1, 
-//                 'Q2': -1, 
-//                 'Q3': -1
-//             }
-//         }, {
-//             '$limit': 10
-//         }
+        {
+            '$match': {
+                'year': '2021'
+            }
+        }, {
+            '$group': {
+                '_id': {
+                    'category': '$category', 
+                    'Region': '$region'
+                }, 
+                'Q1': {
+                    '$sum': '$q1_RM'
+                }, 
+                'Q2': {
+                    '$sum': '$q2_RM'
+                }, 
+                'Q3': {
+                    '$sum': '$q3_RM'
+                }
+            }
+        }, {
+            '$sort': {
+                'Q1': -1, 
+                'Q2': -1, 
+                'Q3': -1
+            }
+        }, {
+            '$limit': 10
+        }
          
-//     ],  function(err, maxTwintyOnetttq){
-//         if(err) return next (err);
-//         res.json(maxTwintyOnetttq)
-//       })
-// })
+    ],  function(err, maxTwintyOneStack){
+        if(err) return next (err);
+        res.json(maxTwintyOneStack)
+      })
+})
 
 // // Top 10 Category by Region at  Q3 in 2021
-// advertiserRoutes.get('/maxTwintyOneR', function(req, res){
-//     Advertiser.aggregate([
-//         {
-//             '$match': {
-//                 'year': '2021'
-//             }
-//         }, {
-//             '$group': {
-//                 '_id': {
-//                     'category': '$category', 
-//                     'format': '$environment'
-//                 }, 
-//                 'Q3': {
-//                     '$sum': '$q3_RM'
-//                 }
-//             }
-//         }, {
-//             '$sort': {
-//                 'Q3': -1
-//             }
-//         }, {
-//             '$limit': 10
-//         } 
-//     ],  function(err, maxTwintyOneE){
-//         if(err) return next (err);
-//         res.json(maxTwintyOneE)
-//       })
-// })
+advertiserRoutes.get('/maxTwintyOneRegi', function(req, res){
+    Advertiser.aggregate([
+        {
+            '$match': {
+                'year': '2021'
+            }
+        }, {
+            '$group': {
+                '_id': {
+                    'category': '$category', 
+                    'Region': '$region'
+                }, 
+                'Q3': {
+                    '$sum': '$q3_RM'
+                }
+            }
+        }, {
+            '$sort': {
+                'Q3': -1
+            }
+        }, {
+            '$limit': 10
+        } 
+    ],  function(err, maxTwintyOneRegi){
+        if(err) return next (err);
+        res.json(maxTwintyOneRegi)
+      })
+})
 
 
 module.exports = advertiserRoutes;
